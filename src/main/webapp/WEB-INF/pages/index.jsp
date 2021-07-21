@@ -14,6 +14,10 @@ sporty shoes homepage
 
 ${homeMessage}
 
+<br>
+<br>
+
+<a href='/admin/'>Admin Login</a>
 
 </body>
 </html>

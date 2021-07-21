@@ -7,6 +7,7 @@
 <title>Sporty Shoes - Admin</title>
 </head>
 <body>
+<a href='/admin/logout'>Logout</a>
 This is the Admin homepage
 </body>
 </html>
