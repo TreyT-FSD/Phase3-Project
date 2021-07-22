@@ -8,16 +8,10 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		
-		<link
-		    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-		    rel="stylesheet"
-		    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-		    crossorigin="anonymous">
-		    
 		<title>Sporty Shoes - Admin Login</title>
 	</head>
 	<body>
+	<%@ include file="nav.html" %>
 	Admin Login Page
 	
 	<!-- a login form goes here. put a little box below it with the default creds -->
@@ -48,17 +42,5 @@
 			
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	<!-- get bootstrap js to make this responsive -->
-	<script 
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
-		crossorigin="anonymous">
-	</script>
 	</body>
 </html>
