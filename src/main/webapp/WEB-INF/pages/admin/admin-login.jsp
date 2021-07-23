@@ -11,14 +11,14 @@
 		<title>Sporty Shoes - Admin Login</title>
 	</head>
 	<body>
-	<%@ include file="nav.html" %>
+	<%@ include file="../nav.html" %>
 	Admin Login Page
 	
 	<!-- a login form goes here. put a little box below it with the default creds -->
 	<div class="container">
 	
 		<div class="card" style="width: 18rem;">
-			<div class="card-header">Admin Login Registration</div>
+			<div class="card-header">Admin Login</div>
 			
 			<form:form action="adminLogin" method="post" modelAttribute="adminObj" >
 			

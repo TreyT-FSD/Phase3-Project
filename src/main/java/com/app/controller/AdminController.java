@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.model.Admin;
 import com.app.service.AdminService;
+import com.app.service.ShoeService;
+import com.app.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,23 +23,30 @@ public class AdminController {
 	@Autowired
 	AdminService adminSvc;
 	
-	//the path under the pages folder where the admin jsp files can be found
-	private static String adminPath = "/admin/";
+	@Autowired
+	ShoeService shoeSvc;
+	
+	@Autowired
+	UserService userSvc;
+	
+//	@Autowired
+//	OrderService orderSvc;
 	
 	@GetMapping("/")
 	public String adminHomepage(HttpSession session, Model model) {		
 
-		Boolean isAuthenticated = (Boolean) session.getAttribute("authenticated");
+		Admin admin = (Admin) session.getAttribute("admin");
 
-		if(isAuthenticated != null && isAuthenticated.booleanValue() == true) {
-			return adminPath + "admin";
+		if(admin != null) {
+			model.addAttribute("shoes", shoeSvc.getAllShoes());
+			model.addAttribute("users", userSvc.getAllUsers());
+			return "/admin/admin";
 		}
 		else {
-			Admin admin = new Admin();
+			admin = new Admin();
 			model.addAttribute("adminObj",admin);
-			return adminPath + "admin-login";
+			return "/admin/admin-login";
 		}
-		
 	}
 	
 	@PostMapping("/adminLogin")
@@ -46,19 +55,19 @@ public class AdminController {
 		//check to see if the creds match the admin creds
 		if(adminSvc.authenticateAdmin(admin)) {
 			//set them as authenticated user
-			session.setAttribute("authenticated", true);
-			return adminPath + "admin";
+			session.setAttribute("admin", admin);
+			return "redirect:/admin/";
 		}
 		else {
 			model.addAttribute("adminLoginMsg", "Invalid Password");
-			return adminPath + "admin-login";
+			return "/admin/admin-login";
 		}
 	}
 	
 	@GetMapping("/logout")
 	public String adminLogout(HttpSession session) {
-		session.invalidate();
-		return "index";
+		session.setAttribute("admin", null);
+		return "redirect:/";
 	}
 
 }
