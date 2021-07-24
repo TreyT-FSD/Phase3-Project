@@ -42,27 +42,11 @@ public class ShoeService {
 				.map(shoe -> {
 					shoe.setShoeName(udpatedShoe.getShoeName());
 					shoe.setShoePrice(udpatedShoe.getShoePrice());
+					shoe.setShoeCategory(udpatedShoe.getShoeCategory());
 					return shoeRepository.save(shoe);
 				}).orElseGet(() -> {
 					udpatedShoe.setShoeId(id);
 					return shoeRepository.save(udpatedShoe);
 				});
-				
-//		//PUT (replace the existing or save the new tutorial)
-//		public Tutorial updateTutorial(long id, Tutorial newTutorial) {
-//			//epic one liner using find and map and handles case were its not found
-//			return tutorialDao.findById(id)
-//				.map(tutorial -> {
-//				tutorial.setTitle(newTutorial.getTitle());
-//				tutorial.setDescription(newTutorial.getDescription());
-//				return tutorialDao.save(tutorial);
-//			})
-//			.orElseGet(() -> {
-//				newTutorial.setId(id);
-//				return tutorialDao.save(newTutorial);
-//			});
-//		}
-		
-		//return null;
 	}
 }

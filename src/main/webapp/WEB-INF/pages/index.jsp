@@ -9,10 +9,7 @@
 		<title>Sporty Shoes</title>
 	</head>
 	<body>
-		<%@ include file="nav.html" %>
-		
-		<a href="/populateShoes">Populate the shoes</a>
-		
+		<%@ include file="nav.jsp" %>
 		<div class="container">
 			<div class="row row-cols-1 row-cols-md-3 g-4">
 			  <c:forEach var="shoe" items="${shoes}" >
@@ -29,9 +26,5 @@
 			  </c:forEach>
 			</div>
 		</div>
-				
-		
-		
-		
 	</body>
 </html>
