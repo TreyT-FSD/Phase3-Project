@@ -35,5 +35,28 @@ public class AdminService {
 		}
 		return false;
 	}
+	
+	public Admin getAdminByAdminUsername(Admin admin) {
+		ExampleMatcher customMatcher = ExampleMatcher
+				.matching()
+				.withIgnorePaths("adminId","adminPwd");
+		
+		Example<Admin> example = Example.of(admin, customMatcher);
+		
+		Optional<Admin> result = adminRepo.findOne(example);
+		
+		if(result.isPresent()) {
+			return result.get();
+		}
+		return null;
+	}
+	
+	public Admin getAdminById(long adminId) {
+		return adminRepo.getById(adminId);
+	}
+	
+	public Admin saveAdmin(Admin admin) {
+		return adminRepo.save(admin);
+	}
 
 }

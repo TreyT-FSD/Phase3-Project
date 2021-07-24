@@ -40,6 +40,7 @@ public class AdminController {
 		if(admin != null) {
 			model.addAttribute("shoes", shoeSvc.getAllShoes());
 			model.addAttribute("users", userSvc.getAllUsers());
+			model.addAttribute("admin", admin);
 			return "/admin/admin";
 		}
 		else {
@@ -55,7 +56,11 @@ public class AdminController {
 		//check to see if the creds match the admin creds
 		if(adminSvc.authenticateAdmin(admin)) {
 			//set them as authenticated user
-			session.setAttribute("admin", admin);
+			Admin sessionAdmin = adminSvc.getAdminByAdminUsername(admin);
+			sessionAdmin.setAdminPwd("");
+			
+			session.setAttribute("admin", sessionAdmin);
+			session.setAttribute("adminAuthenticated", true);
 			return "redirect:/admin/";
 		}
 		else {
@@ -67,7 +72,32 @@ public class AdminController {
 	@GetMapping("/logout")
 	public String adminLogout(HttpSession session) {
 		session.setAttribute("admin", null);
+		session.setAttribute("adminAuthenticated", false);
+		session.setAttribute("adminLoginMsg", null);
+		session.setAttribute("passwordActionMsg", null);
 		return "redirect:/";
+	}
+	
+	@PostMapping("/changeAdminPassword")
+	public String changeAdminPassword(@ModelAttribute("admin")Admin updatedAdmin, HttpSession session, Model model) {
+		Admin admin = adminSvc.getAdminById(updatedAdmin.getAdminId());
+		
+		admin.setAdminPwd(updatedAdmin.getAdminPwd());
+		
+		Admin resultAdmin = adminSvc.saveAdmin(admin);
+		
+		if(resultAdmin != null) {
+			model.addAttribute("passwordActionMsg", "Password Updated.");
+			model.addAttribute("shoes", shoeSvc.getAllShoes());
+			model.addAttribute("users", userSvc.getAllUsers());
+			return "/admin/admin";
+		}
+		model.addAttribute("passwordActionMsg", "Password update failed.");
+		model.addAttribute("shoes", shoeSvc.getAllShoes());
+		model.addAttribute("users", userSvc.getAllUsers());
+		return "/admin/admin";
+		
+		
 	}
 
 }

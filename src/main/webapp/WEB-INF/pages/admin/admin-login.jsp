@@ -11,8 +11,8 @@
 		<title>Sporty Shoes - Admin Login</title>
 	</head>
 	<body>
-	<%@ include file="../nav.html" %>
-	Admin Login Page
+	<%@ include file="../nav.jsp" %>
+	
 	
 	<!-- a login form goes here. put a little box below it with the default creds -->
 	<div class="container">
@@ -21,7 +21,7 @@
 			<div class="card-header">Admin Login</div>
 			
 			<form:form action="adminLogin" method="post" modelAttribute="adminObj" >
-			
+				<form:hidden path="adminId" />
 				<div class="form-group">
 					<label for="adminUsername">User Name</label>
 					<form:input path="adminUsername" cssClass="form-control"/>
@@ -30,7 +30,7 @@
 				
 				<div class="form-group">
 					<label for="adminPwd">password</label>
-					<form:input path="adminPwd" cssClass="form-control"/>
+					<form:password path="adminPwd" cssClass="form-control"/>
 				</div>
 				
 				<div class="form-group">
