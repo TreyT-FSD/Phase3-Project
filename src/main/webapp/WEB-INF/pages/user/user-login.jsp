@@ -10,7 +10,7 @@
 		<title>Sporty Shoes - User Login</title>
 	</head>
 	<body>
-		<%@ include file="../nav.html" %>
+		<%@ include file="../nav.jsp" %>
 		
 		<div class="container">	
 		<div class="card" style="width: 18rem;">
@@ -26,7 +26,7 @@
 				
 				<div class="form-group">
 					<label for="userPwd">Password</label>
-					<form:input path="userPwd" cssClass="form-control"/>
+					<form:password path="userPwd" cssClass="form-control"/>
 				</div>
 				
 				<div class="form-group">

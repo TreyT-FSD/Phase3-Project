@@ -10,11 +10,10 @@
 		<title>SportyShoes</title>
 	</head>
 	<body>
-	<%@ include file="../nav.html" %>
-	<a href='/user/logout'>Logout</a>
-	<c:if test="${loggedInUserMsg != null && loggedInUserMsg.length() != 0}">${loggedInUserMsg}</c:if>
-	
-	
-	
+	<%@ include file="../nav.jsp" %>
+	<div class="container">
+		<div class="row mb-4"><c:if test="${loggedInUserMsg != null && loggedInUserMsg.length() != 0}">${loggedInUserMsg}</c:if></div>
+		<div class="row mb-4"><a href='/user/logout'>Logout</a></div>
+	</div>
 	</body>
 </html>

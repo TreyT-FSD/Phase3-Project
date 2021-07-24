@@ -49,6 +49,7 @@ public class UserController {
 		if(userSvc.isAuthenticatedUser(user)) {
 			//update their session to show logged in
 			session.setAttribute("user", userSvc.getUserByEmail(user));
+			session.setAttribute("userAuthenticated", true);
 			
 			//update the model with their user details so we can show them a message
 			model.addAttribute("user", user);
@@ -66,6 +67,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String userLogout(HttpSession session) {
 		session.setAttribute("user", null);
+		session.setAttribute("userAuthenticated", false);
 		return "redirect:/";
 	}
 	
@@ -81,7 +83,10 @@ public class UserController {
 		
 		//TODO: probably should do some input validation on what the user just entered
 		userSvc.AddUser(user);
-		session.setAttribute("user", userSvc.getUserByEmail(user));
+		User activeUser = userSvc.getUserByEmail(user);
+		activeUser.setUserPwd(null);
+		session.setAttribute("user", activeUser);
+		session.setAttribute("userAuthenticated", true);
 		
 		return "redirect:/user/";
 	}
