@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,7 +16,7 @@
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
 		  <div class="container-fluid">
-		    <a class="navbar-brand" href="#">Sporty Shoes</a>
+		    <a class="navbar-brand" href="/">Sporty Shoes</a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
@@ -21,10 +26,12 @@
 		          <a class="nav-link active" aria-current="page" href="/">Home</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link active" href="/user/">User Login</a>
+		          <c:if test="${!userAuthenticated}"><a class="nav-link active" href="/user/">User Sign-in</a></c:if>
+		          <c:if test="${userAuthenticated}"><a class="nav-link active" href="/user/">User Homepage</a></c:if>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link active" href="/admin/">Admin Login</a>
+		          <c:if test="${!adminAuthenticated}"><a class="nav-link active" href="/admin/">Admin Sign-in</a></c:if>
+				  <c:if test="${adminAuthenticated}"><a class="nav-link active" href="/admin/">Admin Homepage</a></c:if>
 		        </li>
 		      </ul>
 		    </div>
