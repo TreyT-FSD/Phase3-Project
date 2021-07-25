@@ -14,15 +14,15 @@
 	<body>
 		<%@ include file="../nav.jsp" %>
 		<div class="container">
-		<form:form action="changeAdminPassword" method="post" modelAttribute="admin">
-			<form:hidden path="adminId" />
-			<label for=adminPwd>Change Admin Password:</label>
-	  		<form:input type="password" path="adminPwd" required="required"/>
-	  		<form:button cssClass="btn btn-sucess">Submit</form:button>&nbsp;<c:if test="${passwordActionMsg != null && passwordActionMsg.length() != 0}">${passwordActionMsg}</c:if>
-		</form:form>
-		<a href='/admin/logout'>Logout</a>
-		<br>
-		<br>
+			<form:form action="changeAdminPassword" method="post" modelAttribute="admin">
+				<form:hidden path="adminId" />
+				<label for=adminPwd>Change Admin Password:</label>
+		  		<form:input type="password" path="adminPwd" required="required"/>
+		  		<form:button cssClass="btn btn-sucess">Submit</form:button>&nbsp;<c:if test="${passwordActionMsg != null && passwordActionMsg.length() != 0}">${passwordActionMsg}</c:if>
+			</form:form>
+			<a href='/admin/logout'>Logout</a>
+			<br>
+			<br>
 			<h2>Shoes</h2>
 			<a href='/shoe/add'>Add New Shoe</a>
 			<table class="table table-striped table-hover">
@@ -77,6 +77,31 @@
 				</c:forEach>
 			  </tbody>
 			</table>
+			<h2>Orders</h2>
+			<input class="form-control" id="orderSearch" type="text" placeholder="Search Orders">
+			<table class="table table-striped table-hover">
+			  <thead>
+			  <tr>
+				  <th scope="col">Order Id</th>
+				  <th scope="col">Customer Email</th>
+				  <th scope="col">Shoe</th>
+				  <th scope="col">Shoe Category</th>
+				  <th scope="col">Order Date</th>
+				</tr>
+			  </thead>
+			  <tbody id="orderTable">
+			    <c:forEach var="order" items="${orders}">
+				<tr>
+					<td scope="row">${order.getOrderId()}</td>
+					<td scope="row">${order.getOrderCustomer().getUserEmail()}</td>
+					<td scope="row">${order.getOrderShoe().getShoeName()}</td>
+					<td scope="row">${order.getOrderShoe().getShoeCategory()}</td>
+					<td scope="row">${order.getOrderTimeStamp()}</td>
+				</tr>
+				</c:forEach>
+			  </tbody>
+			</table>
+			
 		</div>
 	</body>
 	<script>
@@ -88,5 +113,13 @@
 		    });
 		  });
 		});
+		$(document).ready(function(){
+			  $("#orderSearch").on("keyup", function() {
+			    var value = $(this).val().toLowerCase();
+			    $("#orderTable tr").filter(function() {
+			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			    });
+			  });
+			});
 	</script>
 </html>

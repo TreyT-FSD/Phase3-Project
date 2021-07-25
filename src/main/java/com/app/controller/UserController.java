@@ -47,13 +47,22 @@ public class UserController {
 		
 		//check to see if this user is in the DB
 		if(userSvc.isAuthenticatedUser(user)) {
+			user = userSvc.getUserByEmail(user);
+			user.setUserPwd(null);
 			//update their session to show logged in
-			session.setAttribute("user", userSvc.getUserByEmail(user));
+			session.setAttribute("user", user);
 			session.setAttribute("userAuthenticated", true);
 			
 			//update the model with their user details so we can show them a message
 			model.addAttribute("user", user);
 			
+			//check to see if we need to direct somewhere other than user page
+			String redirect = (String)session.getAttribute("redirect");
+			if(redirect != null && !redirect.isEmpty()) {
+				redirect = (String)session.getAttribute("redirect");
+				session.setAttribute("redirect", "");
+				return redirect;
+			}
 			return "redirect:/user/";
 			
 		} else {
@@ -87,6 +96,14 @@ public class UserController {
 		activeUser.setUserPwd(null);
 		session.setAttribute("user", activeUser);
 		session.setAttribute("userAuthenticated", true);
+		
+		//check to see if we need to direct somewhere other than user page
+		String redirect = (String)session.getAttribute("redirect");
+		if(redirect != null && !redirect.isEmpty()) {
+			redirect = (String)session.getAttribute("redirect");
+			session.setAttribute("redirect", "");
+			return redirect;
+		}
 		
 		return "redirect:/user/";
 	}

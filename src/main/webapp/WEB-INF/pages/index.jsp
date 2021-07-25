@@ -15,11 +15,12 @@
 			  <c:forEach var="shoe" items="${shoes}" >
 			    <div class="col">
 			      <div class="card">
-			        <!-- <img src="..." class="card-img-top" alt="...">  -->
+			        <img src="/images/shoes/shoe.png" class="card-img-top" alt="a shoe">
 			        <div class="card-body">
 			          <h5 class="card-title">${shoe.getShoeName()}</h5>
-			          <p class="card-text">Price: ${shoe.getShoePrice()}</p>
-			          <p class="card-text">Category: ${shoe.getShoeCategory()}</p>
+			          <p class="card-text">Price: $${shoe.getShoePrice()}</p>
+			          <p class="card-text">Category: ${shoe.getShoeCategory().toString().toLowerCase()}</p>
+			          <a href="/purchase?shoe=${shoe.getShoeId()}">Select</a>
 			        </div>
 			      </div>
 			    </div>

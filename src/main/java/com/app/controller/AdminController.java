@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.model.Admin;
 import com.app.service.AdminService;
+import com.app.service.ShoeOrderService;
 import com.app.service.ShoeService;
 import com.app.service.UserService;
 
@@ -29,8 +30,8 @@ public class AdminController {
 	@Autowired
 	UserService userSvc;
 	
-//	@Autowired
-//	OrderService orderSvc;
+	@Autowired
+	ShoeOrderService orderSvc;
 	
 	@GetMapping("/")
 	public String adminHomepage(HttpSession session, Model model) {		
@@ -40,6 +41,7 @@ public class AdminController {
 		if(admin != null) {
 			model.addAttribute("shoes", shoeSvc.getAllShoes());
 			model.addAttribute("users", userSvc.getAllUsers());
+			model.addAttribute("orders", orderSvc.getAllOrders());
 			model.addAttribute("admin", admin);
 			return "/admin/admin";
 		}
