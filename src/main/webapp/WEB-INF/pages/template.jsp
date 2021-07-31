@@ -10,9 +10,5 @@
 		<title>SportyShoes</title>
 	</head>
 	<body>
-	<%@ include file="../nav.jsp" %>
-	
-	
-	
-	</body>
+	<%@ include file="../nav.jsp" %></body>
 </html>
